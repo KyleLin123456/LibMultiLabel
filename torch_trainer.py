@@ -238,7 +238,14 @@ class TorchTrainer:
 
         logging.info(f"Testing on {split} set.")
         test_loader = self._get_dataset_loader(split=split)
-        metric_dict = self.trainer.test(self.model, dataloaders=test_loader, verbose=False)[0]
+        
+        result=dict([monitor_metrics],0)#dict of metrics types
+        eval_acc=??
+        split=numpy.linspace(0,nr_testdata,eval_acc)
+        for i in range(len(split)-1):
+            metric_dict = self.trainer.test(self.model, dataloaders=test_loader[split[int(i),int(i+1)]], verbose=False)[0]
+            result+=metric_dict
+        result/=eval_acc
 
         if self.config.save_k_predictions > 0:
             self._save_predictions(test_loader, self.config.predict_out_path)
