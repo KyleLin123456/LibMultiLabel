@@ -246,8 +246,8 @@ class TorchTrainer:
             input_test=test_loader[i : min(i+eval_accu,nr_testdata)]
             metric_dict = self.trainer.test(self.model, dataloaders=input_test, verbose=False)[0]
             result+=metric_dict
-            i+=1
-        result/=i
+            i+=eval_accu
+        result/=i//eval_accu
 
         if self.config.save_k_predictions > 0:
             self._save_predictions(test_loader, self.config.predict_out_path)
